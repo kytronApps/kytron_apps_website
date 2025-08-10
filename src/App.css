@@ -1,0 +1,3 @@
+/* Espaciados y helpers específicos de la app */
+.stack { display:flex; gap:8px; flex-wrap:wrap }
+.fill { flex:1 }
