@@ -1,19 +1,37 @@
-// src/routes/app.routes.jsx
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-
-import Index from "@/pages/Index";
-import Apps from "@/pages/Apps";
-import PortfolioPage from "@/pages/Portfolio";
-import NotFound from "@/pages/NotFound";
+import Layout from "@/components/layout/Layout";
+import Hero from "@/components/Hero";
+import AppsSection from "@/components/AppsSection";
+import Portfolio from "@/components/Portfolio";
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Index />} />
-      <Route path="/apps" element={<Apps />} />
-      <Route path="/portfolio" element={<PortfolioPage />} />
-      <Route path="*" element={<NotFound />} />
+      <Route
+        path="/"
+        element={
+          <Layout>
+            <Hero />
+          </Layout>
+        }
+      />
+      <Route
+        path="/apps"
+        element={
+          <Layout>
+            <AppsSection />
+          </Layout>
+        }
+      />
+      <Route
+        path="/portfolio"
+        element={
+          <Layout>
+            <Portfolio />
+          </Layout>
+        }
+      />
     </Routes>
   );
 };
