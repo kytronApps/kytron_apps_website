@@ -1,7 +1,6 @@
 import { initializeApp, getApps } from "firebase/app";
 import { initializeFirestore, connectFirestoreEmulator } from "firebase/firestore";
 
-// ⚙️ Configuración exclusiva para KYTRON-APPS
 const kytronFirebaseConfig = {
   apiKey: import.meta.env.VITE_KYTRON_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_KYTRON_FIREBASE_AUTH_DOMAIN,
@@ -11,12 +10,22 @@ const kytronFirebaseConfig = {
   appId: import.meta.env.VITE_KYTRON_FIREBASE_APP_ID,
 };
 
-const existingApp = getApps().find(app => app.name === "kytron");
+// VALIDACIÓN: evita requests a projects/undefined
+if (!kytronFirebaseConfig.projectId) {
+  console.error(
+    "FATAL: VITE_KYTRON_FIREBASE_PROJECT_ID no está definido. " +
+      "Configura las variables VITE_* en el proceso de build (CI)."
+  );
+  throw new Error("Missing VITE_KYTRON_FIREBASE_PROJECT_ID env");
+}
+
+const existingApp = getApps().find((app) => app.name === "kytron");
 const kytronApp = existingApp || initializeApp(kytronFirebaseConfig, "kytron");
 
 export const kytronDb = initializeFirestore(kytronApp, {
-  experimentalForceLongPolling: true,
-  useFetchStreams: false,
+  // en DEV puedes forzar useFetchStreams para evitar XHR con credentials (reduce CORS issues local)
+  experimentalForceLongPolling: false,
+  useFetchStreams: import.meta.env.DEV ? true : false,
 });
 
 // Conectar al emulador en desarrollo (opcional)
