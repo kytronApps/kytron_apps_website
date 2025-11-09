@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
+import DatePicker from "react-datepicker"; // Importa el componente DatePicker
+import "react-datepicker/dist/react-datepicker.css"; // Importa los estilos de DatePicker
 import "./BookPage.css"; // 👈 nuevo CSS
 
 const BookPage = () => {
@@ -9,7 +11,7 @@ const BookPage = () => {
     email: "",
     phone: "",
     serviceType: "",
-    date: "",
+    date: null, // Cambia a null para manejar la fecha
     time: "",
   });
 
@@ -18,6 +20,10 @@ const BookPage = () => {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleDateChange = (date) => {
+    setForm({ ...form, date }); // Actualiza la fecha seleccionada
   };
 
   const handleSubmit = async (e) => {
@@ -35,7 +41,7 @@ const BookPage = () => {
         email: "",
         phone: "",
         serviceType: "",
-        date: "",
+        date: null,
         time: "",
       });
       setTimeout(() => setSuccess(false), 3000);
@@ -63,13 +69,6 @@ const BookPage = () => {
               onChange={handleChange}
               required
             />
-            <input
-              name="email"
-              type="email"
-              placeholder="Correo electrónico"
-              value={form.email}
-              onChange={handleChange}
-            />
           </div>
 
           <div className="form-row">
@@ -79,21 +78,26 @@ const BookPage = () => {
               value={form.phone}
               onChange={handleChange}
             />
-            <input
+            <select
               name="serviceType"
-              placeholder="Tipo de servicio"
               value={form.serviceType}
               onChange={handleChange}
               required
-            />
+            >
+              <option value="" disabled>
+                Tipo de servicio
+              </option>
+              <option value="cover">Cover</option>
+              <option value="repaso">Repaso</option>
+              <option value="cita inicial">Cita inicial</option>
+            </select>
           </div>
 
           <div className="form-row">
-            <input
-              name="date"
-              type="date"
-              value={form.date}
-              onChange={handleChange}
+            <DatePicker
+              selected={form.date}
+              onChange={handleDateChange}
+              placeholderText="Selecciona una fecha"
               required
             />
             <input
