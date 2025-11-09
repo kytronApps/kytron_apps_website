@@ -1,15 +1,13 @@
-// src/components/Footer.jsx
-export default function Footer(){
+const Footer = () => {
   return (
-    <footer className="footer">
-      <div className="footer-inner container">
-        <div>© {new Date().getFullYear()} kytron</div>
-        <nav style={{display:'flex', gap:16}}>
-          <a href="mailto:hello@example.com">Contacto</a>
-          <a href="/legal.html">Legal</a>
-          <a href="https://github.com/youruser" target="_blank" rel="noreferrer">GitHub</a>
-        </nav>
+    <footer className="border-t border-border/30 py-8 px-4 mt-20">
+      <div className="max-w-6xl mx-auto text-center">
+        <p className="text-muted-foreground font-mono text-sm">
+          © {new Date().getFullYear()} • hecho con ☕ y cariño
+        </p>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

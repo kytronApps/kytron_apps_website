@@ -32,3 +32,4 @@ dist-ssr
 *.msi
 *.zip
 *.tar.gz
+.env
