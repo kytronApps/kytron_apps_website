@@ -2,8 +2,8 @@ name: Deploy to Firebase Hosting
 
 on:
   push:
-    branches: [ main ]     # despliega en cada push a main
-  workflow_dispatch:        # puedes lanzarlo a mano desde Actions
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -24,6 +24,14 @@ jobs:
         run: npm ci
 
       - name: Build Vite
+        env:
+          VITE_KYTRON_FIREBASE_API_KEY: ${{ secrets.VITE_KYTRON_FIREBASE_API_KEY }}
+          VITE_KYTRON_FIREBASE_AUTH_DOMAIN: ${{ secrets.VITE_KYTRON_FIREBASE_AUTH_DOMAIN }}
+          VITE_KYTRON_FIREBASE_PROJECT_ID: ${{ secrets.VITE_KYTRON_FIREBASE_PROJECT_ID }}
+          VITE_KYTRON_FIREBASE_STORAGE_BUCKET: ${{ secrets.VITE_KYTRON_FIREBASE_STORAGE_BUCKET }}
+          VITE_KYTRON_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_KYTRON_FIREBASE_MESSAGING_SENDER_ID }}
+          VITE_KYTRON_FIREBASE_APP_ID: ${{ secrets.VITE_KYTRON_FIREBASE_APP_ID }}
+          VITE_KYTRON_FIREBASE_MEASUREMENT_ID: ${{ secrets.VITE_KYTRON_FIREBASE_MEASUREMENT_ID }}
         run: npm run build
 
       - name: Deploy to Firebase Hosting
@@ -31,5 +39,5 @@ jobs:
         with:
           args: deploy --only hosting
         env:
-          GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KYTRON_APPS }}
+          GCP_SA_KEY: ${{ secrets.VARIABLES_WEB_KYTRON_AND_APPLICATIOSN }}
           PROJECT_ID: kytron-apps
