@@ -28,7 +28,7 @@ const Hero = () => {
             onClick={() => navigate('/portfolio')}
             className="font-mono"
           >
-            → mi portfolio
+            → Kytron Apps
           </Button>
         </div>
       </div>

@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
       <header className="fixed top-0 left-0 w-full z-20 bg-[#f8f5f2]/95 backdrop-blur-md border-b border-gray-200">
         <nav className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
           <h1 className="font-serif text-lg flex items-center gap-2">
-            ☕ <span className="font-bold">mi portfolio</span>
+            ☕ <span className="font-bold">Kytron Apps</span>
           </h1>
           <div className="flex gap-3">
             <NavLink
