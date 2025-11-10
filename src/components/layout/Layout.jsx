@@ -66,7 +66,7 @@ const Layout = ({ children }) => {
           </button>
         </nav>
 
-        {/* 🔹 Menú móvil desplegable */}
+        {/*  Menú móvil desplegable */}
         <div
           className={`md:hidden fixed top-[60px] left-0 w-full bg-[#f8f5f2] border-t border-gray-200 shadow-lg transform transition-transform duration-300 ${
             menuOpen ? "translate-y-0 opacity-100" : "-translate-y-5 opacity-0 pointer-events-none"
