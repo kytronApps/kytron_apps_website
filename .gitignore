@@ -32,4 +32,5 @@ dist-ssr
 *.msi
 *.zip
 *.tar.gz
-.envkytron-apps-firebase-adminsdk-fbsvc-ee38d40528.json
+.env
+kytron-apps-firebase-adminsdk-fbsvc-ee38d40528.json
