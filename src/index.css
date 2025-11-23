@@ -1,7 +1,195 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
-  background-color: #f5f3f0;
-  color: #3b2f26;
-  font-family: 'IBM Plex Mono', monospace;
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Retro clean palette - warm earth tones */
+    --background: 35 30% 96%;
+    --foreground: 25 25% 20%;
+
+    --card: 35 25% 98%;
+    --card-foreground: 25 25% 20%;
+
+    --popover: 35 25% 98%;
+    --popover-foreground: 25 25% 20%;
+
+    --primary: 18 60% 55%;
+    --primary-foreground: 35 30% 96%;
+
+    --secondary: 35 20% 88%;
+    --secondary-foreground: 25 25% 20%;
+
+    --muted: 35 15% 90%;
+    --muted-foreground: 25 15% 45%;
+
+    --accent: 42 45% 65%;
+    --accent-foreground: 25 25% 20%;
+
+    /* Secondary accent - ultra discrete for microdetails */
+    --accent-secondary: 15 45% 42%;
+    --accent-secondary-foreground: 35 30% 96%;
+
+    --destructive: 0 60% 50%;
+    --destructive-foreground: 35 30% 96%;
+
+    --border: 35 20% 85%;
+    --input: 35 20% 85%;
+    --ring: 18 60% 55%;
+
+    --radius: 0.25rem;
+
+    /* Custom retro tokens */
+    --retro-warm: 25 40% 60%;
+    --retro-dark: 25 30% 25%;
+    --retro-light: 42 35% 85%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    --gradient-subtle: linear-gradient(
+      180deg,
+      hsl(var(--background)) 0%,
+      hsl(var(--secondary)) 100%
+    );
+
+    /* Editorial shadows - very soft and diffused */
+    --shadow-soft: 0 4px 24px hsl(var(--foreground) / 0.06);
+    --shadow-medium: 0 8px 40px hsl(var(--foreground) / 0.08);
+    --shadow-editorial: 0 12px 48px hsl(var(--foreground) / 0.1);
+
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --radius: 0.25rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 25 25% 12%;
+    --foreground: 35 25% 92%;
+
+    --card: 25 22% 15%;
+    --card-foreground: 35 25% 92%;
+
+    --popover: 25 22% 15%;
+    --popover-foreground: 35 25% 92%;
+
+    --primary: 18 60% 55%;
+    --primary-foreground: 35 30% 96%;
+
+    --secondary: 25 15% 22%;
+    --secondary-foreground: 35 25% 92%;
+
+    --muted: 25 12% 25%;
+    --muted-foreground: 35 15% 60%;
+
+    --accent: 42 45% 50%;
+    --accent-foreground: 35 25% 92%;
+
+    --accent-secondary: 15 40% 38%;
+    --accent-secondary-foreground: 35 25% 92%;
+
+    --destructive: 0 60% 45%;
+    --destructive-foreground: 35 25% 92%;
+
+    --border: 25 15% 25%;
+    --input: 25 15% 25%;
+    --ring: 18 60% 55%;
+
+    --retro-warm: 25 35% 45%;
+    --retro-dark: 25 20% 18%;
+    --retro-light: 42 25% 35%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    --gradient-subtle: linear-gradient(
+      180deg,
+      hsl(var(--background)) 0%,
+      hsl(var(--secondary)) 100%
+    );
+
+    --shadow-soft: 0 4px 24px hsl(0 0% 0% / 0.2);
+    --shadow-medium: 0 8px 40px hsl(0 0% 0% / 0.25);
+    --shadow-editorial: 0 12px 48px hsl(0 0% 0% / 0.3);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        hsl(var(--foreground) / 0.015) 2px,
+        hsl(var(--foreground) / 0.015) 4px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        hsl(var(--foreground) / 0.015) 2px,
+        hsl(var(--foreground) / 0.015) 4px
+      );
+    background-size: 100px 100px;
+  }
+
+  /* Typography refinements */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    line-height: 1.75;
+  }
+
+  /* Underline animation for links */
+  .nav-link {
+    @apply relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-[1px] bg-accent-secondary scale-x-0 origin-left transition-transform duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply scale-x-100;
+  }
 }
