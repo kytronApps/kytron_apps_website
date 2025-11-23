@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
             <h3 className="font-serif text-2xl font-semibold text-foreground mb-2">
-              Portfolio
+              KytronApps
             </h3>
             <p className="font-sans text-sm text-muted-foreground">
               Diseño retro, soluciones modernas
@@ -45,7 +45,7 @@ const Footer = () => {
         
         <div className="mt-8 pt-8 border-t border-border text-center">
           <p className="font-mono text-xs text-muted-foreground">
-            © 2024 Portfolio. Todos los derechos reservados.
+            © 2025 Portfolio. Todos los derechos reservados.
           </p>
         </div>
       </div>

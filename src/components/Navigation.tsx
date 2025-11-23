@@ -30,7 +30,7 @@ const Navigation = () => {
             onClick={() => scrollToSection("hero")}
             className="font-serif text-xl font-semibold text-foreground hover:text-primary transition-colors"
           >
-            Portfolio
+            KytronApps
           </button>
           
           <div className="flex items-center gap-8">

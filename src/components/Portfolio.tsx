@@ -1,50 +1,22 @@
 import { ExternalLink } from "lucide-react";
+import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../lib/firebase";
 
 const Portfolio = () => {
-  const projects = [
-    {
-      title: "Brand Identity",
-      category: "Diseño Gráfico",
-      description: "Sistema de identidad visual con enfoque retro minimalista",
-      year: "2024",
-      thumbnail: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=300&fit=crop"
-    },
-    {
-      title: "E-commerce Platform",
-      category: "Desarrollo Web",
-      description: "Tienda online con diseño limpio y experiencia de compra fluida",
-      year: "2024",
-      thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop"
-    },
-    {
-      title: "Mobile Banking App",
-      category: "UI/UX Design",
-      description: "Aplicación financiera con interfaz intuitiva y segura",
-      year: "2023",
-      thumbnail: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=400&h=300&fit=crop"
-    },
-    {
-      title: "Restaurant Website",
-      category: "Desarrollo Web",
-      description: "Sitio web responsive con sistema de reservas integrado",
-      year: "2023",
-      thumbnail: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop"
-    },
-    {
-      title: "Illustration Series",
-      category: "Arte Digital",
-      description: "Colección de ilustraciones con estética retro contemporánea",
-      year: "2023",
-      thumbnail: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=400&h=300&fit=crop"
-    },
-    {
-      title: "Productivity Dashboard",
-      category: "Aplicación Web",
-      description: "Panel de control para gestión de proyectos y equipos",
-      year: "2024",
-      thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop"
+  const [projects, setProjects] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadProjects() {
+      const ref = collection(db, "projects");
+      const snapshot = await getDocs(ref);
+      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setProjects(data);
+      setLoading(false);
     }
-  ];
+    loadProjects();
+  }, []);
 
   return (
     <section id="portfolio" className="py-24 bg-background">
@@ -54,27 +26,55 @@ const Portfolio = () => {
             Portfolio
           </h2>
           <p className="font-sans text-lg text-muted-foreground max-w-2xl mx-auto">
-            Una selección de proyectos que reflejan mi pasión por el diseño atemporal y la funcionalidad moderna
+            Una colección de proyectos que fusionan diseño retro–moderno, funcionalidad precisa y una visión creativa que define el estilo de Kytron Apps.
           </p>
+          <div className="w-20 h-px bg-border mx-auto mt-8 mb-16 opacity-40"></div>
         </div>
 
+        {loading && (
+          <p className="text-center text-muted-foreground mb-12">
+            Cargando proyectos…
+          </p>
+        )}
+        <div className="max-w-2xl mx-auto mb-24 text-center animate-fade-in leading-relaxed">
+          <h3 className="font-serif text-4xl font-bold text-foreground mb-6 tracking-tight">Sobre mí</h3>
+          <p className="font-sans text-muted-foreground leading-relaxed mb-6">
+            Soy Emily Herrera, desarrolladora Full Stack con una sensibilidad marcada por el diseño retro–moderno.
+            Combino tecnología, estética editorial y creatividad para construir experiencias digitales cálidas,
+            intuitivas y llenas de personalidad bajo mi marca personal <strong>Kytron Apps</strong>.
+          </p>
+
+          <div className="mt-10 mb-12 text-sm text-muted-foreground/90 font-sans">
+            <p className="mb-2">
+              📍 Zaragoza, España · 👩‍💻 Full Stack Developer · 🧉 Matcha lover
+            </p>
+            <p>
+              Enfocada en diseño  retro–moderno, mobile development y experiencias digitales cálidas.
+            </p>
+          </div>
+
+          <h4 className="font-serif text-2xl text-foreground mb-2">Títulos y formación</h4>
+          <p className="font-sans text-sm text-muted-foreground mb-6">
+            Máster en Desarrollo de Aplicaciones Móviles · Especialización en Big Data e Inteligencia Artificial ·
+            Formación profesional en desarrollo y sistemas.
+          </p>
+
+          <h4 className="font-serif text-2xl text-foreground mb-2">Experiencia</h4>
+          <p className="font-sans text-sm text-muted-foreground leading-relaxed">
+            He trabajado en ecosistemas corporativos desarrollando aplicaciones, automatizando procesos,
+            diseñando interfaces y construyendo herramientas de productividad. Mi enfoque combina precisión técnica,
+            diseño minimalista y una identidad visual retro que define cada uno de mis proyectos.
+          </p>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group relative bg-card border border-border hover:border-accent-secondary transition-all duration-300 animate-fade-in overflow-hidden hover:-translate-y-1 hover:shadow-[0_12px_48px_hsl(var(--foreground)/0.1)]"
+              className="group relative bg-card border border-border hover:border-primary/40 transition-all duration-500 animate-fade-in overflow-hidden rounded-sm hover:-translate-y-2 hover:shadow-[0_16px_55px_hsl(var(--foreground)/0.08)]"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="absolute top-0 left-0 w-1 h-full bg-accent-secondary transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
-              
-              <div className="aspect-[4/3] overflow-hidden bg-muted">
-                <img 
-                  src={project.thumbnail} 
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              
+              <div className="h-2 bg-gradient-to-r from-primary/30 via-accent-secondary/20 to-primary/30 opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
               <div className="p-6">
                 <div className="flex justify-between items-start mb-3">
                   <span className="font-geometric text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -92,11 +92,18 @@ const Portfolio = () => {
                 <p className="font-sans text-sm text-muted-foreground leading-relaxed mb-4">
                   {project.description}
                 </p>
-                
-                <div className="flex items-center gap-2 text-accent-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="font-sans text-sm">Ver proyecto</span>
-                  <ExternalLink className="w-4 h-4" />
-                </div>
+                {project.technologies && (
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {project.technologies.map((tech: string, tIndex: number) => (
+                      <span
+                        key={tIndex}
+                        className="font-geometric text-[10px] bg-retro-light/60 text-foreground/90 px-2 py-0.5 rounded-sm border border-border/40 shadow-[0_1px_2px_rgba(0,0,0,0.06)] group-hover:bg-retro-light/80 transition-all duration-300"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           ))}
