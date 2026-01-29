@@ -1,8 +1,10 @@
 
 export interface AppData {
-  id: string;
+   id: string;
   title: string;
-  Description: string;
-  dispositivos: string[];
-  link?: string;
+  description: string;
+  tags: string[];
+  color: "orange" | "teal" | "coral" | "yellow";
+  github?: string;
+  demo?: string;
 }

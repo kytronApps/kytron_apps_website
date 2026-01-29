@@ -1,18 +1,29 @@
-import Navigation from "@/components/Navigation";
-import Hero from "@/components/Hero";
-import Apps from "@/components/Apps";
-import Portfolio from "@/components/Portfolio";
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import AboutSection from "@/components/AboutSection";
+import ProjectsSection from "@/components/ProjectsSection";
+import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import RetroDecorations from "@/components/RetroDecorations";
 
 const Index = () => {
   return (
-    <main className="min-h-screen bg-background">
-      <Navigation />
-      <Hero />
-      <Apps />
-      <Portfolio />
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      {/* VHS scan effect overlay - very subtle */}
+      <div className="fixed inset-0 pointer-events-none z-50 vhs-effect" />
+      
+      {/* Subtle decorative vectors */}
+      <RetroDecorations />
+      
+      <Navbar />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <ProjectsSection />
+        <ContactSection />
+      </main>
       <Footer />
-    </main>
+    </div>
   );
 };
 

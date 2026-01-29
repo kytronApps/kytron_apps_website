@@ -1,53 +1,78 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-secondary py-12 border-t border-border">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-center md:text-left">
-            <h3 className="font-serif text-2xl font-semibold text-foreground mb-2">
-              KytronApps
-            </h3>
-            <p className="font-sans text-sm text-muted-foreground">
-              Diseño retro, soluciones modernas
-            </p>
-          </div>
-          
-          <div className="flex gap-6">
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 border border-border text-foreground hover:border-primary hover:text-primary transition-colors"
-              aria-label="GitHub"
-            >
-              <Github className="w-5 h-5" />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 border border-border text-foreground hover:border-primary hover:text-primary transition-colors"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-5 h-5" />
-            </a>
-            <a
-              href="mailto:contact@example.com"
-              className="p-3 border border-border text-foreground hover:border-primary hover:text-primary transition-colors"
-              aria-label="Email"
-            >
-              <Mail className="w-5 h-5" />
-            </a>
-          </div>
+    <footer className="py-8 px-4 border-t border-border/50 relative">
+      <div className="absolute inset-0 bg-gradient-to-t from-retro-orange/5 to-transparent opacity-50" />
+      
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          {/* Logo/Name */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-2"
+          >
+            <span className="text-2xl">🎮</span>
+            <span className="font-display text-lg font-bold text-retro-orange">
+              PORTFOLIO
+            </span>
+          </motion.div>
+
+          {/* Navigation */}
+          <nav className="flex items-center gap-6">
+            {["Inicio", "Sobre mí", "Proyectos", "Contacto"].map((item, index) => (
+              <motion.a
+                key={item}
+                href={`#${item === "Inicio" ? "" : item.toLowerCase().replace(" ", "-")}`}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="text-muted-foreground hover:text-retro-orange font-mono text-xs transition-colors"
+              >
+                {item}
+              </motion.a>
+            ))}
+          </nav>
+
+          {/* Copyright */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-2 text-muted-foreground font-mono text-xs"
+          >
+            <span className="text-japanese">作成</span>
+            <span>•</span>
+            <span>{currentYear}</span>
+            <span>•</span>
+            <span className="text-retro-coral">♥</span>
+          </motion.div>
         </div>
-        
-        <div className="mt-8 pt-8 border-t border-border text-center">
-          <p className="font-mono text-xs text-muted-foreground">
-            © 2025 Portfolio. Todos los derechos reservados.
-          </p>
-        </div>
+
+        {/* Decorative line */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="mt-6 h-[1px] bg-gradient-to-r from-transparent via-retro-orange/50 to-transparent"
+        />
+
+        {/* Fun retro message */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="text-center mt-4 text-muted-foreground/50 font-mono text-xs"
+        >
+          &lt;/&gt; Diseñado con amor y mucho café ☕ en un universo retro-futurista
+        </motion.p>
       </div>
     </footer>
   );
