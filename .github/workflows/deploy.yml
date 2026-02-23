@@ -22,12 +22,12 @@ jobs:
 
       - name: Build image
         run: |
-          IMAGE=ghcr.io/${{ github.repository }}
+          IMAGE=ghcr.io/kytronapps/kytron_apps_website
           docker build -t $IMAGE:latest .
           docker build -t $IMAGE:${{ github.sha }} .
 
       - name: Push image
         run: |
-          IMAGE=ghcr.io/${{ github.repository }}
+          IMAGE=ghcr.io/kytronapps/kytron_apps_website
           docker push $IMAGE:latest
           docker push $IMAGE:${{ github.sha }}
