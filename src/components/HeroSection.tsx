@@ -62,7 +62,7 @@ const HeroSection = () => {
           className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-8 font-mono"
         >
           Mezclo creatividad{" "}
-          <span className="text-retro-teal">retro-futurista</span>.
+          <span className="text-retro-teal">ilustración</span>.
           <br />
           funcionalidad y calma para crear experiencias digitales únicas.
         </motion.p>
