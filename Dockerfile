@@ -12,9 +12,6 @@ RUN npm run build
 # -------- PRODUCTION STAGE --------
 FROM nginx:alpine
 
-# Opcional: eliminar config default nginx
-RUN rm -rf /etc/nginx/conf.d/default.conf
-
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 EXPOSE 80
